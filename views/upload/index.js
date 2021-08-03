@@ -9,9 +9,9 @@ export default function Upload() {
           <div className="shadow sm:rounded-md sm:overflow-hidden">
             <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
               <div>
-                <h3 className="text-lg leading-6 font-medium text-gray-900">Upload portfolio</h3>
+                <h3 className="text-lg leading-6 font-medium text-gray-900">File Upload</h3>
                 <p className="mt-1 text-sm text-gray-500">
-                  Upload your portfolio information here or share file link information .
+                  Upload your portfolio information here (csv file).
                 </p>
               </div>
 
@@ -19,7 +19,7 @@ export default function Upload() {
                 
 
                 
-                <div className="col-span-3">
+                {/* <div className="col-span-3">
                   <label htmlFor="file-link" className="block text-sm font-medium text-gray-700">
                   File Link
                   </label>
@@ -33,7 +33,7 @@ export default function Upload() {
                   <p className="mt-2 text-sm text-gray-500">
                     ULR link for your portfolia or upload the file below
                   </p>
-                </div>
+                </div> */}
                 {/* <div className="col-span-3">
                   <label className="block text-sm font-medium text-gray-700">Photo</label>
                   <div className="mt-1 flex items-center">

@@ -5,7 +5,7 @@ import UploadView from '@/views/upload'
 
 function upload() {
     return (
-        <MainLayout >
+        <MainLayout>
             <UploadView/>
         </MainLayout>
        
