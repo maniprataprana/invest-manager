@@ -1,5 +1,5 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -9,29 +9,39 @@ import {
   MenuIcon,
   UsersIcon,
   XIcon,
-  UploadIcon
-} from '@heroicons/react/outline'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+  UploadIcon,
+  ChartPieIcon,
+  CashIcon,
+  NewspaperIcon,
+  ReceiptTaxIcon,
+} from "@heroicons/react/outline";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'Upload', href: '/upload', icon: UploadIcon, current: false },
-  { name: 'Equity', href: '/equity', icon: UsersIcon, current: false },
-  { name: 'Debt', href: '/debt', icon: FolderIcon, current: false },
-  { name: 'Mutual Funds', href: '/mfunds', icon: CalendarIcon, current: false },
-  { name: 'Options', href: '/options', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '/reports', icon: ChartBarIcon, current: false },
-]
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+  { name: "Upload", href: "/upload", icon: UploadIcon, current: false },
+  { name: "Equity", href: "/equity", icon: ChartPieIcon, current: false },
+  { name: "Debt", href: "/debt", icon: CashIcon, current: false },
+  {
+    name: "Mutual Funds",
+    href: "/mfunds",
+    icon: NewspaperIcon,
+    current: false,
+  },
+  { name: "Options", href: "/options", icon: ReceiptTaxIcon, current: false },
+  { name: "Reports", href: "/reports", icon: ChartBarIcon, current: false },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-export default function MainLayout({children}) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const router = useRouter()
-  //console.log(router)
+export default function MainLayout({ children }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+  const currentPath = router?.asPath;
+  console.log(currentPath);
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -92,21 +102,23 @@ export default function MainLayout({children}) {
                 </div>
                 <nav className="mt-5 px-2 space-y-1">
                   {navigation.map((item) => (
-                    <Link href={item.href} key={item.name} >
-                    
-                    <a
-                      //key={item.name}
-                      // href={item.href}
-                      className={classNames(
-                        router.asPath === item.href
-                          ? 'bg-indigo-800 text-white'
-                          : 'text-white hover:bg-indigo-600 hover:bg-opacity-75',
-                        'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                      )}
-                    >
-                      <item.icon className="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" aria-hidden="true" />
-                      {item.name}
-                    </a>
+                    <Link href={item.href} key={item.name}>
+                      <a
+                        //key={item.name}
+                        // href={item.href}
+                        className={classNames(
+                          currentPath === item.href
+                            ? "bg-indigo-800 text-white"
+                            : "text-white hover:bg-indigo-600 hover:bg-opacity-75",
+                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                        )}
+                      >
+                        <item.icon
+                          className="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300"
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </a>
                     </Link>
                   ))}
                 </nav>
@@ -116,14 +128,22 @@ export default function MainLayout({children}) {
                   <div className="flex items-center">
                     <div>
                       <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
-                        <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                        <svg
+                          className="h-full w-full text-gray-300"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
                           <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                       </span>
                     </div>
                     <div className="ml-3">
-                      <p className="text-base font-medium text-white">Mani Rana</p>
-                      <p className="text-sm font-medium text-indigo-200 group-hover:text-white">Logout</p>
+                      <p className="text-base font-medium text-white">
+                        Mani Rana
+                      </p>
+                      <p className="text-sm font-medium text-indigo-200 group-hover:text-white">
+                        Logout
+                      </p>
                     </div>
                   </div>
                 </a>
@@ -151,18 +171,23 @@ export default function MainLayout({children}) {
               </div>
               <nav className="mt-5 flex-1 px-2 space-y-1">
                 {navigation.map((item) => (
-                  <Link href={item.href} key={item.name} >
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.href === router.asPath ? 'bg-indigo-800 text-white' : 'text-white hover:bg-indigo-600 hover:bg-opacity-75',
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                    )}
-                  >
-                    <item.icon className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" aria-hidden="true" />
-                    {item.name}
-                  </a>
+                  <Link href={item.href} key={item.name}>
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        currentPath === item.href
+                          ? "bg-indigo-800 text-white"
+                          : "text-white hover:bg-indigo-600 hover:bg-opacity-75",
+                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      )}
+                    >
+                      <item.icon
+                        className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300"
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
                   </Link>
                 ))}
               </nav>
@@ -171,15 +196,21 @@ export default function MainLayout({children}) {
               <a href="#" className="flex-shrink-0 w-full group block">
                 <div className="flex items-center">
                   <div>
-                   <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
-                      <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                    <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
+                      <svg
+                        className="h-full w-full text-gray-300"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                       </svg>
                     </span>
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-white">Mani Rana</p>
-                    <p className="text-xs font-medium text-indigo-200 group-hover:text-white">Logout</p>
+                    <p className="text-xs font-medium text-indigo-200 group-hover:text-white">
+                      Logout
+                    </p>
                   </div>
                 </div>
               </a>
@@ -214,5 +245,5 @@ export default function MainLayout({children}) {
         </main>
       </div>
     </div>
-  )
+  );
 }
