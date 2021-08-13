@@ -1,12 +1,12 @@
 import MainLayout from "@/components/layout/MainLayout";
-import UploadView from "@/views/upload";
+import EquityView from "@/views/equity";
 
-function upload() {
+function equity() {
   return (
     <MainLayout>
-      <UploadView />
+      <EquityView />
     </MainLayout>
   );
 }
 
-export default upload;
+export default equity;

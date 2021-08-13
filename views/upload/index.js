@@ -7,6 +7,8 @@ import fetcher from "@/utils/fetcher";
 export default function Upload() {
   const [tableData, setTableData] = useState(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const [showTable, setShowTable] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState(null);
   const handleOnDrop = (data) => {
     console.log("---------------------------");
@@ -42,6 +44,11 @@ export default function Upload() {
       //console.log(error);
     }
     setIsSaveDisabled(false);
+  };
+
+  const onShowTableClick = (e) => {
+    e.preventDefault();
+    setShowTable(!showTable);
   };
   return (
     <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
@@ -98,6 +105,15 @@ export default function Upload() {
           </div>
 
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            {/* {!isSaveDisabled && (
+              <button
+                type="submit"
+                className="disabled:opacity-50 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-8"
+                onClick={onShowTableClick}
+              >
+                {showTable ? "Hide Data" : "View Data"}
+              </button>
+            )} */}
             <button
               type="submit"
               className="disabled:opacity-50 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -109,7 +125,8 @@ export default function Upload() {
           </div>
         </div>
       </form>
-      <CSVTable data={tableData} />
+      {/* <CSVTable data={tableData} /> */}
+      {/* {showTable && <CSVTable data={tableData} />} */}
     </div>
   );
 }

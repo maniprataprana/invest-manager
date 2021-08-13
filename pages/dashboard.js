@@ -1,10 +1,10 @@
 import MainLayout from "@/components/layout/MainLayout";
-import UploadView from "@/views/upload";
+import DashboardView from "@/views/dashboard";
 
 function upload() {
   return (
     <MainLayout>
-      <UploadView />
+      <DashboardView />
     </MainLayout>
   );
 }
