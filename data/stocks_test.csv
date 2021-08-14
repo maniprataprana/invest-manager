@@ -1,0 +1,19 @@
+type,scrips,holding_value,ISIN
+Equity,Axis Bank Ltd," 10,00,000 ",INE238A01034
+Equity,HDFC Bank Ltd,50000,INE040A01034
+Equity,ICICI Bank Ltd. ," 2,50,000 ",INE090A01021
+Equity,South Indian Bank Ltd. ," 1,00,000 ",INE683A01023
+Equity,State Bank of India," 10,00,000 ",INE062A01020
+Equity,Bharti Airtel Ltd," 5,40,000 ",INE397D01024
+Equity,Container Corporation of India Ltd," 4,40,000 ",INE111A01025
+Equity,TCI Express Ltd," 5,50,000 ",INE586V01016
+Equity,Transport Corporation of India Ltd," 23,40,000 ",INE688A01022
+Equity,Finolex Industries Ltd," 2,20,000 ",INE183A01024
+Equity,Mahindra Lifespace Developers Ltd," 2,00,000 ",INE813A01018
+Equity,Westlife Development Ltd," 5,50,000 ",INE274F01020
+Debt,8.15% State Bank of India 2022,100,INE062A08157
+Debt,8.75% State Bank of India Perpetual (Call - 2024),200,INE062A08215
+Debt,11.40% Tata Power Co.Ltd Perpetual. (Call - 2021),1000,INE245A08034
+Mutual Funds,ICICI Prudential Equity Arbitrage Fund Direct Plan (Dividend)," 10,00,000 ",INF109K01BF6
+Mutual Funds,IDFC Cash Fund Direct Plan (Growth)," 2,00,000 ",INF194K01VX9
+ETF,Nppon India ETF Nifty Bees,20000,INF204KB14I2
