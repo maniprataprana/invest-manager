@@ -19,31 +19,33 @@ import { RadioGroup } from "@headlessui/react";
 
 const plans = [
   {
-    name: "Equity",
+    name: "Portfolio data",
+    type: "equity",
     // priceMonthly: 29,
     // priceYearly: 290,
     // limit: "Up to 5 active job postings",
   },
   {
-    name: "Market",
+    name: "Market data",
+    type: "market",
     // priceMonthly: 99,
     // priceYearly: 990,
     // limit: "Up to 25 active job postings",
   },
-  {
-    name: "Options",
-    // priceMonthly: 249,
-    // priceYearly: 2490,
-    // limit: "Unlimited active job postings",
-  },
+  //   {
+  //     name: "Options",
+  //     priceMonthly: 249,
+  //     priceYearly: 2490,
+  //     limit: "Unlimited active job postings",
+  //   },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DataSelection() {
-  const [selected, setSelected] = useState(plans[0]);
+export default function DataSelection({ setSelected, selected }) {
+  //const [selected, setSelected] = useState(plans[0]);
 
   return (
     <RadioGroup value={selected} onChange={setSelected}>

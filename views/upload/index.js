@@ -10,7 +10,10 @@ export default function Upload() {
   const [tableData, setTableData] = useState(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [showTable, setShowTable] = useState(false);
-  // const [selectedDataType, setSelectedDataType] = useState(plans[0]);
+  const [selectedDataType, setSelectedDataType] = useState({
+    name: "Portfolio data",
+    type: "equity",
+  });
 
   const [errorMessage, setErrorMessage] = useState(null);
   const handleOnDrop = (data) => {
@@ -39,11 +42,13 @@ export default function Upload() {
     e.preventDefault();
     //console.log(tableData);
     setIsSaveDisabled(true);
+    const API_ROUTE =
+      selectedDataType.type === "equity"
+        ? `${API_URL}${API_ROUTES.equity_uploader}`
+        : `${API_URL}${API_ROUTES.equity_market_data_uploader}`;
+    console.log("API_ROUTE", API_ROUTE);
     try {
-      const response = await fetcher(
-        `${API_URL}${API_ROUTES.equity_portfolioupload}`,
-        { body: tableData }
-      );
+      const response = await fetcher(API_ROUTE, { body: tableData });
       console.log("response", response);
     } catch (error) {
       setErrorMessage("Error uploading file to server!");
@@ -111,7 +116,10 @@ export default function Upload() {
           </div>
 
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <DataSelection />
+            <DataSelection
+              selected={selectedDataType}
+              setSelected={setSelectedDataType}
+            />
             {/* {!isSaveDisabled && (
               <button
                 type="submit"
