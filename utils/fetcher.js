@@ -16,17 +16,19 @@ function fetcher(endpoint, { body, ...customConfig } = {}) {
   if (body) {
     config.body = JSON.stringify(body);
   }
-  console.log(config);
+  //console.log(config);
   return window.fetch(`${endpoint}`, config).then(async (response) => {
     if (response.status === 401) {
       //logout();
       // window.location.assign(window.location);
       return;
     }
+    console.log("response fetch", response);
     if (response.ok) {
       return await response.json();
     } else {
       const errorMessage = await response.text();
+      console.log("response errorMessage", errorMessage);
       return Promise.reject(new Error(errorMessage));
     }
   });

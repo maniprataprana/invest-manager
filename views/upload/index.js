@@ -42,7 +42,7 @@ export default function Upload() {
         `${API_URL}${API_ROUTES.equity_portfolio}`,
         { body: tableData }
       );
-      console.log(response);
+      console.log("response", response);
     } catch (error) {
       setErrorMessage("Error uploading file to server!");
       //console.log(error);
