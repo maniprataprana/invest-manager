@@ -3,6 +3,7 @@ import { CSVReader } from "react-papaparse";
 import FileUpload from "./FileUpload";
 import CSVTable from "./CSVTable";
 import fetcher from "@/utils/fetcher";
+import { API_URL, API_ROUTES } from "config";
 
 export default function Upload() {
   const [tableData, setTableData] = useState(null);
@@ -37,8 +38,11 @@ export default function Upload() {
     //console.log(tableData);
     setIsSaveDisabled(true);
     try {
-      const response = await fetcher("/api/fileupload", { body: tableData });
-      //console.log(response);
+      const response = await fetcher(
+        `${API_URL}${API_ROUTES.equity_portfolio}`,
+        { body: tableData }
+      );
+      console.log(response);
     } catch (error) {
       setErrorMessage("Error uploading file to server!");
       //console.log(error);
