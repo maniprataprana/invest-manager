@@ -4,11 +4,13 @@ import FileUpload from "./FileUpload";
 import CSVTable from "./CSVTable";
 import fetcher from "@/utils/fetcher";
 import { API_URL, API_ROUTES } from "config";
+import DataSelection from "./DataSelection";
 
 export default function Upload() {
   const [tableData, setTableData] = useState(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [showTable, setShowTable] = useState(false);
+  // const [selectedDataType, setSelectedDataType] = useState(plans[0]);
 
   const [errorMessage, setErrorMessage] = useState(null);
   const handleOnDrop = (data) => {
@@ -109,6 +111,7 @@ export default function Upload() {
           </div>
 
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <DataSelection />
             {/* {!isSaveDisabled && (
               <button
                 type="submit"
