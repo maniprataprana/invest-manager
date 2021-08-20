@@ -1,7 +1,7 @@
 const API_URL = "https://marketrisksystem.herokuapp.com";
 
 const API_ROUTES = {
-  equity_portfolio: "/equity/portfolio",
+  equity_portfolioupload: "/equity/portfolioupload",
 };
 
 export { API_URL, API_ROUTES };

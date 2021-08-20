@@ -41,7 +41,7 @@ export default function Upload() {
     setIsSaveDisabled(true);
     try {
       const response = await fetcher(
-        `${API_URL}${API_ROUTES.equity_portfolio}`,
+        `${API_URL}${API_ROUTES.equity_portfolioupload}`,
         { body: tableData }
       );
       console.log("response", response);
