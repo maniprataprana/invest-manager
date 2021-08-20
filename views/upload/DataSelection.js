@@ -14,7 +14,7 @@
   }
   ```
 */
-import { useState } from "react";
+//import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 
 const plans = [
@@ -46,6 +46,7 @@ function classNames(...classes) {
 
 export default function DataSelection({ setSelected, selected }) {
   //const [selected, setSelected] = useState(plans[0]);
+  console.log(selected);
 
   return (
     <RadioGroup value={selected} onChange={setSelected}>

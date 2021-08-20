@@ -57,6 +57,8 @@ import {
 
 import OverviewHeader from "./Header";
 //import Datatable from "./Datatable";
+import EquityInputType from "./EquityInputType";
+import EquityDataForm from "./EquityDataForm";
 
 const transactions = [
   {
@@ -83,6 +85,8 @@ function classNames(...classes) {
 
 export default function EquityView() {
   const total = 12313;
+  const [selectedComputation, setSelectedComputation] = useState(null);
+
   return (
     <div className="relative h-screen flex overflow-hidden bg-gray-100">
       <div className="flex-1 overflow-auto focus:outline-none">
@@ -94,7 +98,13 @@ export default function EquityView() {
                 Portfolio Overview
               </h2> */}
               <OverviewHeader total={total} />
+              <EquityInputType
+                selected={selectedComputation}
+                setSelected={setSelectedComputation}
+              />
+              <EquityDataForm type={selectedComputation?.type} />
             </div>
+
             {/* <Datatable /> */}
             {/* <Reports transactions={transactions} /> */}
           </div>

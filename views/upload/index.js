@@ -42,14 +42,27 @@ export default function Upload() {
     e.preventDefault();
     //console.log(tableData);
     setIsSaveDisabled(true);
+    //TODO: move logic to config
     const API_ROUTE =
       selectedDataType.type === "equity"
-        ? `${API_URL}${API_ROUTES.equity_uploader}`
-        : `${API_URL}${API_ROUTES.equity_market_data_uploader}`;
+        ? {
+            route: `${API_URL}${API_ROUTES.equity_uploader}`,
+            key: "equityportfolioupload",
+          }
+        : {
+            route: `${API_URL}${API_ROUTES.equity_market_data_uploader}`,
+            key: "equitymarketdata",
+          };
+
     console.log("API_ROUTE", API_ROUTE);
     try {
-      const response = await fetcher(API_ROUTE, { body: tableData });
+      const response = await fetcher(API_ROUTE.route, {
+        body: { [API_ROUTE.key]: tableData },
+      });
       console.log("response", response);
+      if (selectedDataType.type === "equity") {
+        window.localStorage.setItem("uuid", response.key);
+      }
     } catch (error) {
       setErrorMessage("Error uploading file to server!");
       //console.log(error);
@@ -131,7 +144,7 @@ export default function Upload() {
             )} */}
             <button
               type="submit"
-              className="disabled:opacity-50 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="disabled:opacity-50 bg-indigo-600 my-4 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               disabled={isSaveDisabled}
               onClick={onSaveClick}
             >

@@ -16,7 +16,7 @@ function fetcher(endpoint, { body, ...customConfig } = {}) {
   if (body) {
     config.body = JSON.stringify(body);
   }
-  //console.log(config);
+  console.log(config);
   return window.fetch(`${endpoint}`, config).then(async (response) => {
     if (response.status === 401) {
       //logout();
