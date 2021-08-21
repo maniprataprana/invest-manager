@@ -10,8 +10,8 @@ const people = [
 ];
 
 export default function ComputationResults({ data }) {
-  const results = Object.keys(data);
   if (!data) return null;
+  const results = Object.keys(data);
 
   return (
     <div className="flex flex-col">
