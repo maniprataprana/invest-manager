@@ -20,6 +20,7 @@ import { useState } from "react";
 import { API_URL, API_ROUTES } from "../../config";
 import fetcher from "@/utils/fetcher";
 import ResultsTable from "./ResultsTable";
+import ComputationResults from "./ComputationResults";
 
 export default function EquityDataForm({ type }) {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
@@ -52,6 +53,7 @@ export default function EquityDataForm({ type }) {
               uuid,
               days,
               confidencelevel,
+              vartype: "covar",
             },
           };
 
@@ -171,7 +173,8 @@ export default function EquityDataForm({ type }) {
           Get Results
         </button>
       </div>
-      {tableData && <ResultsTable data={tableData} />}
+      {tableData && type === "valuation" && <ResultsTable data={tableData} />}
+      {tableData && type === "risk" && <ComputationResults data={tableData} />}
     </div>
   );
 }
