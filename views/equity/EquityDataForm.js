@@ -15,22 +15,27 @@
   ```
 */
 
-//import ReactDatePicker from "react-datepicker";
 import { useState, useCallback } from "react";
 import { API_URL, API_ROUTES } from "../../config";
 import fetcher from "@/utils/fetcher";
 import ResultsTable from "./ResultsTable";
 import ComputationResults from "./ComputationResults";
 import toast from "@/components/toast";
+import { format } from "date-fns";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// import DayPickerInput from "react-day-picker/DayPickerInput";
+// import "react-day-picker/lib/style.css";
 
 export default function EquityDataForm({ type }) {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
-  const [date, setStartDate] = useState("2021-08-27");
+  const [date, setStartDate] = useState(new Date());
   const [confidencelevel, setConfidencelevel] = useState(0);
   const [days, setDays] = useState(0);
   const [tableData, setTableData] = useState(null);
 
+  //console.log("date", format(date, "yyyy-MM-dd"));
   const notify = useCallback((type, message) => {
     toast({ type, message });
   }, []);
@@ -40,6 +45,7 @@ export default function EquityDataForm({ type }) {
     //console.log(tableData);
     setIsSaveDisabled(true);
     //TODO: move logic to config
+
     const uuid = window.localStorage.getItem("uuid");
     console.log(uuid);
     const API_ROUTE =
@@ -47,14 +53,14 @@ export default function EquityDataForm({ type }) {
         ? {
             route: `${API_URL}${API_ROUTES.equity_valuation}`,
             body: {
-              date,
+              date: format(date, "yyyy-MM-dd"),
               uuid,
             },
           }
         : {
             route: `${API_URL}${API_ROUTES.equity_risk_computation}`,
             body: {
-              date,
+              date: format(date, "yyyy-MM-dd"),
               uuid,
               days,
               confidencelevel,
@@ -98,18 +104,22 @@ export default function EquityDataForm({ type }) {
           <div className="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
               <div className="grid grid-cols-6 gap-6">
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6 sm:col-span-3 z-10">
                   <label
                     htmlFor="equity-date"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-3"
                   >
                     Date
                   </label>
-                  {/* <ReactDatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                  /> */}
-                  <input
+                  <ReactDatePicker
+                    selected={date}
+                    dateFormat="yyyy-MM-dd"
+                    onChange={(n_date) => setStartDate(n_date)}
+                    isClearable
+                    placeholderText="Select a date"
+                  />
+                  {/* <DayPickerInput onDayChange={(day) => console.log(day)} /> */}
+                  {/* <input
                     type="text"
                     name="equity-date"
                     id="equity-date"
@@ -117,7 +127,7 @@ export default function EquityDataForm({ type }) {
                     onChange={(e) => setStartDate(e.target.value)}
                     autoComplete="given-name"
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  />
+                  /> */}
                 </div>
 
                 {type === "risk" && (
