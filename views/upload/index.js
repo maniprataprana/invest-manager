@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { CSVReader } from "react-papaparse";
 import FileUpload from "./FileUpload";
 import CSVTable from "./CSVTable";
 import fetcher from "@/utils/fetcher";
 import { API_URL, API_ROUTES } from "config";
 import DataSelection from "./DataSelection";
+import toast from "@/components/toast";
 
 export default function Upload() {
   const [tableData, setTableData] = useState(null);
@@ -16,6 +17,15 @@ export default function Upload() {
   });
 
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const notify = useCallback((type, message) => {
+    toast({ type, message });
+  }, []);
+
+  // const dismiss = useCallback(() => {
+  //   toast.dismiss();
+  // }, []);
+
   const handleOnDrop = (data) => {
     console.log("---------------------------");
     console.log(data);
@@ -28,6 +38,7 @@ export default function Upload() {
     console.log(err);
     setIsSaveDisabled(true);
     setErrorMessage("Error uploading file!");
+    notify("error", "Error uploading file to browser!");
   };
 
   const handleOnRemoveFile = (data) => {
@@ -63,9 +74,11 @@ export default function Upload() {
       if (selectedDataType.type === "equity") {
         window.localStorage.setItem("uuid", response.key);
       }
+      notify("success", "File succesfully uploaded!");
     } catch (error) {
       setErrorMessage("Error uploading file to server!");
       //console.log(error);
+      notify("error", "Error uploading file to server!");
     }
     setIsSaveDisabled(false);
   };

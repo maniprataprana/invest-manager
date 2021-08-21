@@ -16,11 +16,12 @@
 */
 
 //import ReactDatePicker from "react-datepicker";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { API_URL, API_ROUTES } from "../../config";
 import fetcher from "@/utils/fetcher";
 import ResultsTable from "./ResultsTable";
 import ComputationResults from "./ComputationResults";
+import toast from "@/components/toast";
 
 export default function EquityDataForm({ type }) {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
@@ -29,6 +30,10 @@ export default function EquityDataForm({ type }) {
   const [confidencelevel, setConfidencelevel] = useState(0);
   const [days, setDays] = useState(0);
   const [tableData, setTableData] = useState(null);
+
+  const notify = useCallback((type, message) => {
+    toast({ type, message });
+  }, []);
 
   const getComputationResults = async (e) => {
     e.preventDefault();
@@ -69,6 +74,7 @@ export default function EquityDataForm({ type }) {
       setTableData(response);
     } catch (error) {
       //setErrorMessage("Error uploading file to server!");
+      notify("error", "Error fetching data!");
       console.log(error);
       setTableData(null);
     }
