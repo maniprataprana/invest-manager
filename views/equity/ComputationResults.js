@@ -56,7 +56,7 @@ export default function ComputationResults({ data }) {
                     {VaR_return_varcovar}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {VaR_return_histsim}
+                    {VaR_holding_value_varcovar}
                   </td>
                 </tr>
                 <tr key={"result" + "row2"}>
@@ -64,7 +64,7 @@ export default function ComputationResults({ data }) {
                     Historical Simulation Approach
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {VaR_holding_value_varcovar}
+                    {VaR_return_histsim}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {VaR_holding_value_histsim}
