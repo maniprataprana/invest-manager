@@ -35,6 +35,7 @@ export default function EquityDataForm() {
 
   const [date, setStartDate] = useState(new Date());
   const [confidencelevel, setConfidencelevel] = useState(0);
+  const [riskfreerate, setRiskFreeRate] = useState(0);
   const [days, setDays] = useState(0);
   const [tableData, setTableData] = useState(null);
   const [lastType, setLastType] = useState(null);
@@ -68,6 +69,7 @@ export default function EquityDataForm() {
               uuid,
               days,
               confidencelevel,
+              riskfreerate,
               vartype: "covar",
             },
           };
@@ -170,6 +172,23 @@ export default function EquityDataForm() {
                           name="equity-confidence"
                           id="equity-confidence"
                           onChange={(e) => setConfidencelevel(e.target.value)}
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-4">
+                        <label
+                          htmlFor="risk-free-rate"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Risk Free Rate
+                        </label>
+                        <input
+                          type="number"
+                          value={riskfreerate}
+                          name="risk-free-rate"
+                          id="risk-free-rate"
+                          onChange={(e) => setRiskFreeRate(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
