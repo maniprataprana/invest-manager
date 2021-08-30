@@ -13,7 +13,7 @@ export default function ResultsTable({ data }) {
   return (
     <div className="flex flex-col">
       <h3 className="text-lg font-medium text-gray-900 py-4">
-        VaR Computation
+        Valuation Results
       </h3>
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
