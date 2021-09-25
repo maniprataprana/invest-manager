@@ -5,6 +5,7 @@ const API_ROUTES = {
   equity_market_data_uploader: "/equity/marketdata",
   equity_valuation: "/equity/valuation",
   equity_risk_computation: "/equity/riskcomputation",
+  bond_riskvaluation: "/bond/riskvaluation",
 };
 
 export { API_URL, API_ROUTES };

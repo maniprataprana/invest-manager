@@ -30,7 +30,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // import "react-day-picker/lib/style.css";
 
 export default function EquityDataForm() {
-  const [computeType, setComputeType] = useState(null);
+ // const [computeType, setComputeType] = useState(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   const [startdate, setStartDate] = useState(new Date());
@@ -40,6 +40,8 @@ export default function EquityDataForm() {
   const [notional, setNotional] = useState(0);
   const [frequency, setFrequency] = useState(0);
   const [bondMaturity, setBondMaturity] = useState(0);
+  const [zeroMaturity, setZeroMaturity] = useState("")
+  const [zeroRates, setZeroRates] = useState("")
   
   const [tableData, setTableData] = useState(null);
   const [lastType, setLastType] = useState(null);
@@ -57,37 +59,33 @@ export default function EquityDataForm() {
 
     const uuid = window.localStorage.getItem("uuid");
     console.log(uuid);
-    const API_ROUTE =
-      computeType?.type === "valuation"
-        ? {
-            route: `${API_URL}${API_ROUTES.equity_valuation}`,
-            body: {
-              date: format(date, "yyyy-MM-dd"),
-              uuid,
-            },
-          }
-        : {
-            route: `${API_URL}${API_ROUTES.equity_risk_computation}`,
-            body: {
-              date: format(date, "yyyy-MM-dd"),
-              uuid,
-              days,
-              confidencelevel,
-              riskfreerate,
-              vartype: "covar",
-            },
-          };
+    const API_ROUTE = {
+        route: `${API_URL}${API_ROUTES.bond_riskvaluation}`,
+        body: {
+          startdate: format(startdate, "yyyy-MM-dd"),
+          maturitydate: format(maturitydate, "yyyy-MM-dd"),
+          frequency,
+          coupon,
+          price,
+          notional,
+          zero_maturities:zeroMaturity,
+          zero_rates: zeroRates,
+          bond_maturity:bondMaturity,
+          //uuid,
+        },
+      };
 
     console.log("API_ROUTE", API_ROUTE);
+    //return
     try {
       const response = await fetcher(API_ROUTE.route, {
         body: API_ROUTE.body,
       });
-      console.log("response", response, computeType?.type);
+    //  console.log("response", response, computeType?.type);
       //   if (selectedDataType.type === "equity") {
       //     window.localStorage.setItem("uuid", response.key);
       //   }
-      setLastType(computeType?.type);
+      //setLastType(computeType?.type);
       setTableData(response);
     } catch (error) {
       //setErrorMessage("Error uploading file to server!");
@@ -100,7 +98,7 @@ export default function EquityDataForm() {
   };
 
   // if (!computeType?.type) return null;
-  console.log(computeType?.type);
+  //console.log(computeType?.type);
   return (
     <>
       {/* <EquityInputType selected={computeType} setSelected={setComputeType} /> */}
@@ -247,6 +245,39 @@ export default function EquityDataForm() {
                       />
                     </div>
                    
+                    <div className="col-span-6 sm:col-span-4">
+                        <label
+                          htmlFor="zero-maturity"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Zero Maturities
+                        </label>
+                        <input
+                          type="text"
+                          value={zeroMaturity}
+                          name="zero-maturity"
+                          id="zero-maturity"
+                          onChange={(e) => setZeroMaturity(e.target.value)}
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-4">
+                        <label
+                          htmlFor="debt-notional"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Zero Rates
+                        </label>
+                        <input
+                          type="text"
+                          value={zeroRates}
+                          name="zero-rates"
+                          id="zero-rates"
+                          onChange={(e) => setZeroRates(e.target.value)}
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
                 </div>
               </form>
             </div>
@@ -269,12 +300,12 @@ export default function EquityDataForm() {
             Get Results
           </button>
         </div>
-        {tableData && lastType === "valuation" && (
+        {/* {tableData && lastType === "valuation" && (
           <ResultsTable data={tableData} />
         )}
         {tableData && lastType === "risk" && (
           <ComputationResults data={tableData} />
-        )}
+        )} */}
       </div>
     </>
   );
