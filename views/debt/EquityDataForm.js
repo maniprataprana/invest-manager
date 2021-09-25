@@ -44,7 +44,7 @@ export default function EquityDataForm() {
   const [zeroRates, setZeroRates] = useState("")
   
   const [tableData, setTableData] = useState(null);
-  const [lastType, setLastType] = useState(null);
+  //const [lastType, setLastType] = useState(null);
   //console.log("date", format(date, "yyyy-MM-dd"));
   const notify = useCallback((type, message) => {
     toast({ type, message });
@@ -68,8 +68,8 @@ export default function EquityDataForm() {
           coupon,
           price,
           notional,
-          zero_maturities:zeroMaturity,
-          zero_rates: zeroRates,
+          zero_maturities:zeroMaturity.split(","),
+          zero_rates: zeroRates.split(","),
           bond_maturity:bondMaturity,
           //uuid,
         },
@@ -81,17 +81,18 @@ export default function EquityDataForm() {
       const response = await fetcher(API_ROUTE.route, {
         body: API_ROUTE.body,
       });
-    //  console.log("response", response, computeType?.type);
+    console.log("response", response);
       //   if (selectedDataType.type === "equity") {
       //     window.localStorage.setItem("uuid", response.key);
       //   }
       //setLastType(computeType?.type);
+
       setTableData(response);
     } catch (error) {
       //setErrorMessage("Error uploading file to server!");
       notify("error", "Error fetching data!");
       console.log(error);
-      setLastType(null);
+      //setLastType(null);
       setTableData(null);
     }
     setIsSaveDisabled(false);
@@ -300,12 +301,13 @@ export default function EquityDataForm() {
             Get Results
           </button>
         </div>
-        {/* {tableData && lastType === "valuation" && (
+        
+         {/* {tableData && lastType === "valuation" && (
           <ResultsTable data={tableData} />
-        )}
-        {tableData && lastType === "risk" && (
-          <ComputationResults data={tableData} />
         )} */}
+        {tableData && (
+          <ComputationResults data={tableData} />
+        )}
       </div>
     </>
   );
