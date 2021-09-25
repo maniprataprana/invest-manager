@@ -32,6 +32,13 @@ const plans = [
     // priceYearly: 990,
     // limit: "Up to 25 active job postings",
   },
+  {
+    name: "Debt data",
+    type: "debt",
+    // priceMonthly: 99,
+    // priceYearly: 990,
+    // limit: "Up to 25 active job postings",
+  },
   //   {
   //     name: "Options",
   //     priceMonthly: 249,
